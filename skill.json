@@ -1,0 +1,15 @@
+{
+  "name": "genpark-dynamic-ast-transformer-instrumentation-skill",
+  "version": "1.0.0",
+  "description": "Dynamic AST transformer injecting telemetry probes and call graph interceptors.",
+  "author": "GenPark AI",
+  "license": "Apache-2.0",
+  "dependencies": [],
+  "keywords": [
+    "ast-transformer",
+    "code-instrumentation",
+    "telemetry",
+    "call-graph",
+    "metaprogramming"
+  ]
+}
