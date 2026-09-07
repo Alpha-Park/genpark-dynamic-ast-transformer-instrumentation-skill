@@ -64,10 +64,11 @@ class CodeInstrumenter:
         ast.fix_missing_locations(transformed_tree)
 
         compiled_code = compile(transformed_tree, filename="<instrumented>", mode="exec")
-        local_scope: Dict[str, Any] = {"__probe__": self.probe}
-        exec(compiled_code, globals(), local_scope)
+        # Ensure __probe__ is in global scope so functions find it in __globals__
+        global_scope: Dict[str, Any] = {"__builtins__": __builtins__, "__probe__": self.probe}
+        exec(compiled_code, global_scope)
 
-        func = local_scope.get(target_func_name)
+        func = global_scope.get(target_func_name)
         if not func:
             raise ValueError(f"Function '{target_func_name}' not found in source.")
 
